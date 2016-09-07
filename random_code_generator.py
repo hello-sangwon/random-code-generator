@@ -14,7 +14,7 @@ def generate_random_code(count, length, show_hyphen=False):
             serial += random.choice(alnum)
             if show_hyphen and (x + 1) % 4 == 0 and (x + 1) != length:
                 serial += '-'
-        print(serial)
+        yield serial
 
 
 def usage():
@@ -39,7 +39,8 @@ if __name__ == '__main__':
         assert count
         assert length
 
-        generate_random_code(count, length, show_hyphen)
+        for line in generate_random_code(count, length, show_hyphen):
+            print(line)
     except AssertionError:
         usage()
         sys.exit(1)
